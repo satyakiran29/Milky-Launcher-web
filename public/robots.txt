@@ -1,0 +1,5 @@
+# robots.txt for Milky Launcher
+User-agent: *
+Allow: /
+
+Sitemap: https://skdev.psatyakiran.in/sitemap.xml

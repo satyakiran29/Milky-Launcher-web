@@ -87,9 +87,10 @@ export default function App() {
           <a 
             href={devSiteUrl}
             target="_blank" 
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="header-dev-pill"
             title="Visit Developer Website"
+            aria-label="Visit Developer Website skdev.psatyakiran.in"
           >
             <Globe size={14} className="globe-mini-icon" />
             <span>skdev.psatyakiran.in</span>
@@ -98,9 +99,10 @@ export default function App() {
           <a 
             href={telegramUrl}
             target="_blank" 
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="header-tg-pill"
             title="Join Official Telegram"
+            aria-label="Join Official Telegram Channel @milkylc"
           >
             <Send size={14} className="tg-mini-icon" />
             <span>@milkylc</span>
@@ -197,11 +199,11 @@ export default function App() {
           </div>
 
           {/* Meet The 2 Developers */}
-          <div className="developers-section">
-            <div className="dev-section-title">
+          <section className="developers-section" aria-label="Development Team">
+            <h2 className="dev-section-title">
               <Users size={15} className="accent-icon" />
               <span>Developed by 2 Developers</span>
-            </div>
+            </h2>
 
             <div className="developers-grid">
               {developers.map((dev, idx) => (
@@ -209,9 +211,10 @@ export default function App() {
                   key={idx}
                   href={dev.link}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="dev-profile-card"
                   title={`Open ${dev.name}'s profile`}
+                  aria-label={`Open ${dev.name}'s profile`}
                 >
                   <img 
                     src={dev.avatar} 
@@ -232,7 +235,7 @@ export default function App() {
                 </a>
               ))}
             </div>
-          </div>
+          </section>
         </div>
       </main>
 
@@ -240,14 +243,14 @@ export default function App() {
       <footer className="coming-soon-footer">
         <p>
           © {new Date().getFullYear()} Milky Launcher. Developed with passion by{' '}
-          <a href="https://github.com/Spyou" target="_blank" rel="noreferrer" className="footer-dev-link">Krishna Vishwakarma</a>{' '}
+          <a href="https://github.com/Spyou" target="_blank" rel="noopener noreferrer" className="footer-dev-link" aria-label="Krishna Vishwakarma GitHub">Krishna Vishwakarma</a>{' '}
           &{' '}
-          <a href={devSiteUrl} target="_blank" rel="noreferrer" className="footer-dev-link">Satyakiran</a>.
+          <a href={devSiteUrl} target="_blank" rel="noopener noreferrer" className="footer-dev-link" aria-label="Satyakiran Website">Satyakiran</a>.
         </p>
         <div className="footer-links">
-          <a href={telegramUrl} target="_blank" rel="noreferrer">Telegram: @milkylc</a>
+          <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Official Telegram: @milkylc">Telegram: @milkylc</a>
           <span className="sep">•</span>
-          <a href={devSiteUrl} target="_blank" rel="noreferrer">skdev.psatyakiran.in</a>
+          <a href={devSiteUrl} target="_blank" rel="noopener noreferrer" aria-label="Developer Website: skdev.psatyakiran.in">skdev.psatyakiran.in</a>
           <span className="sep">•</span>
           <span>Google Play Exclusive</span>
         </div>
