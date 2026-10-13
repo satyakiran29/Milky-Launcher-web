@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import PrivacyPolicy from './PrivacyPolicy';
 import { 
   Send, 
   ArrowRight, 
   Users, 
-  Globe,
-  Clock,
-  ExternalLink
+  Globe, 
+  Clock, 
+  ExternalLink,
+  Shield
 } from 'lucide-react';
 
 const GithubIcon = ({ size = 14 }) => (
@@ -18,6 +20,48 @@ const GithubIcon = ({ size = 14 }) => (
 export default function App() {
   const telegramUrl = 'https://t.me/milkylc';
   const devSiteUrl = 'https://skdev.psatyakiran.in/';
+
+  const [currentView, setCurrentView] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path.includes('privacy') || hash.includes('privacy')) {
+        return 'privacy';
+      }
+    }
+    return 'home';
+  });
+
+  const navigateTo = (view) => {
+    setCurrentView(view);
+    if (typeof window !== 'undefined') {
+      if (view === 'privacy') {
+        window.history.pushState({ view: 'privacy' }, 'Privacy Policy', '/privacy');
+      } else {
+        window.history.pushState({ view: 'home' }, 'Milky Launcher', '/');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path.includes('privacy') || hash.includes('privacy')) {
+        setCurrentView('privacy');
+      } else {
+        setCurrentView('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('hashchange', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('hashchange', handlePopState);
+    };
+  }, []);
 
   // Target: November 19, 2026
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -64,6 +108,10 @@ export default function App() {
     }
   ];
 
+  if (currentView === 'privacy') {
+    return <PrivacyPolicy onNavigateHome={() => navigateTo('home')} />;
+  }
+
   return (
     <div className="coming-soon-wrapper">
       {/* Cosmic background glow */}
@@ -84,6 +132,16 @@ export default function App() {
         </div>
 
         <div className="header-actions">
+          <button 
+            onClick={() => navigateTo('privacy')}
+            className="header-privacy-pill"
+            title="View Google Play Privacy Policy"
+            aria-label="View Privacy Policy"
+          >
+            <Shield size={14} className="privacy-mini-icon" />
+            <span>Privacy Policy</span>
+          </button>
+
           <a 
             href={devSiteUrl}
             target="_blank" 
@@ -242,12 +300,20 @@ export default function App() {
       {/* Clean Minimal Footer */}
       <footer className="coming-soon-footer">
         <p>
-          © {new Date().getFullYear()} Milky Launcher. Developed with passion by{' '}
+          © 2026 Milky Launcher. Developed with passion by{' '}
           <a href="https://github.com/Spyou" target="_blank" rel="noopener noreferrer" className="footer-dev-link" aria-label="Krishna Vishwakarma GitHub">Krishna Vishwakarma</a>{' '}
           &{' '}
           <a href={devSiteUrl} target="_blank" rel="noopener noreferrer" className="footer-dev-link" aria-label="Satyakiran Website">Satyakiran</a>.
         </p>
         <div className="footer-links">
+          <button 
+            onClick={() => navigateTo('privacy')}
+            className="footer-link-btn"
+            aria-label="Privacy Policy"
+          >
+            Privacy Policy
+          </button>
+          <span className="sep">•</span>
           <a href={telegramUrl} target="_blank" rel="noopener noreferrer" aria-label="Official Telegram: @milkylc">Telegram: @milkylc</a>
           <span className="sep">•</span>
           <a href={devSiteUrl} target="_blank" rel="noopener noreferrer" aria-label="Developer Website: skdev.psatyakiran.in">skdev.psatyakiran.in</a>
