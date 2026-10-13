@@ -849,6 +849,11 @@
   color: rgba(138, 147, 178, 0.35);
 }
 
+/* Mobile Table of Contents */
+.mobile-toc-container {
+  display: none;
+}
+
 /* Responsive adjustments */
 @media (max-width: 960px) {
   .privacy-content-layout {
@@ -857,6 +862,75 @@
 
   .privacy-sidebar {
     display: none;
+  }
+
+  .mobile-toc-container {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .mobile-toc-details {
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    background: rgba(14, 20, 38, 0.85);
+    border: 1px solid var(--card-border);
+  }
+
+  .mobile-toc-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--starlight);
+    user-select: none;
+    list-style: none;
+  }
+
+  .mobile-toc-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mts-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--beam-bright);
+  }
+
+  .mts-badge {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    background: rgba(159, 196, 255, 0.12);
+    color: var(--beam);
+    border: 1px solid rgba(159, 196, 255, 0.2);
+  }
+
+  .mobile-toc-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(138, 147, 178, 0.15);
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  .mobile-toc-link {
+    font-size: 0.84rem;
+    color: var(--haze);
+    padding: 6px 8px;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+  }
+
+  .mobile-toc-link:active,
+  .mobile-toc-link:hover {
+    color: var(--starlight);
+    background: rgba(159, 196, 255, 0.1);
   }
 
   .privacy-article {
@@ -870,6 +944,232 @@
   .perm-row {
     grid-template-columns: 1fr;
     gap: 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .privacy-header {
+    padding: 10px 14px;
+  }
+
+  .header-inner {
+    gap: 8px;
+  }
+
+  .header-left {
+    gap: 8px;
+  }
+
+  .header-brand-divider {
+    display: none;
+  }
+
+  .back-home-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .brand-logo-mini {
+    width: 28px;
+    height: 28px;
+  }
+
+  .brand-name-mini {
+    font-size: 0.86rem;
+  }
+
+  .brand-sub-mini {
+    font-size: 0.7rem;
+  }
+
+  .action-pill-btn {
+    padding: 6px 10px;
+    font-size: 0.76rem;
+  }
+
+  .privacy-main-container {
+    padding: 18px 12px 48px 12px;
+    gap: 20px;
+  }
+
+  .privacy-hero {
+    padding: 24px 14px;
+    border-radius: var(--radius-md);
+  }
+
+  .privacy-hero-title {
+    font-size: 1.85rem;
+    margin-bottom: 10px;
+  }
+
+  .privacy-hero-subtitle {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  .meta-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding-top: 14px;
+  }
+
+  .highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .highlight-card {
+    padding: 16px;
+  }
+
+  .privacy-article {
+    padding: 20px 14px;
+    border-radius: var(--radius-md);
+    gap: 26px;
+  }
+
+  .section-title {
+    font-size: 1.24rem;
+  }
+
+  .policy-section h3 {
+    font-size: 1.02rem;
+  }
+
+  .policy-section p,
+  .policy-section li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    word-break: break-word;
+  }
+
+  .policy-section ul,
+  .policy-section ol {
+    padding-left: 18px;
+  }
+
+  .callout {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .callout-content {
+    font-size: 0.86rem;
+  }
+
+  .policy-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-sm);
+  }
+
+  .policy-table th,
+  .policy-table td {
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .perm-card {
+    padding: 16px 14px;
+  }
+
+  .perm-card-header {
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .perm-icon-wrapper {
+    width: 34px;
+    height: 34px;
+  }
+
+  .perm-label {
+    font-size: 0.98rem;
+  }
+
+  .perm-status-tag {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  .perm-details-grid {
+    padding: 12px;
+  }
+
+  .perm-row {
+    grid-template-columns: 1fr;
+    gap: 2px;
+    margin-bottom: 4px;
+  }
+
+  .perm-field {
+    font-size: 0.75rem;
+    color: var(--beam);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .perm-value {
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  .contact-card-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .contact-box {
+    padding: 16px 14px;
+  }
+
+  .cb-val {
+    font-size: 0.95rem;
+    word-break: break-all;
+  }
+
+  .btn-cosmic {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.88rem;
+    padding: 12px 16px;
+  }
+
+  .privacy-footer {
+    padding: 24px 14px;
+    font-size: 0.82rem;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sep {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions .print-hide {
+    display: none !important;
+  }
+
+  .brand-sub-mini {
+    display: none;
+  }
+
+  .meta-info-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .privacy-hero-title {
+    font-size: 1.6rem;
   }
 }
 

@@ -272,6 +272,34 @@ export default function PrivacyPolicy({ onNavigateHome }) {
           </div>
         </section>
 
+        {/* Mobile Quick Jump Table of Contents */}
+        <div className="mobile-toc-container print-hide">
+          <details className="mobile-toc-details glass-panel">
+            <summary className="mobile-toc-summary">
+              <span className="mts-title">
+                <FileText size={15} />
+                <span>Table of Contents (Jump to Section)</span>
+              </span>
+              <span className="mts-badge">14 Sections</span>
+            </summary>
+            <nav className="mobile-toc-nav" aria-label="Mobile table of contents">
+              {sections.map(s => (
+                <a 
+                  key={s.id} 
+                  href={`#${s.id}`} 
+                  className="mobile-toc-link"
+                  onClick={(e) => {
+                    const details = e.currentTarget.closest('details');
+                    if (details) details.removeAttribute('open');
+                  }}
+                >
+                  {s.title}
+                </a>
+              ))}
+            </nav>
+          </details>
+        </div>
+
         {/* Content Layout with Table of Contents */}
         <div className="privacy-content-layout">
           {/* Sidebar Navigation */}
