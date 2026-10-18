@@ -185,7 +185,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
 
             <div className="header-brand-mini" onClick={onNavigateHome} style={{ cursor: 'pointer' }}>
               <img 
-                src="/milky-icon-round.webp" 
+                src="/logo.svg" 
                 alt="Milky Launcher Icon" 
                 className="brand-logo-mini" 
               />
