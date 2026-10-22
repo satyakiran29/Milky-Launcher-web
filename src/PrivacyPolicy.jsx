@@ -8,7 +8,6 @@ import {
   HardDrive,
   Fingerprint,
   Trash2,
-  EyeOff,
   CheckCircle2,
   ExternalLink,
   ArrowLeft,
@@ -21,122 +20,179 @@ import {
   Smartphone,
   Layers,
   Radio,
-  Mail
+  Mail,
+  Wifi,
+  CreditCard,
+  Lock,
+  Globe,
+  Activity,
+  FolderLock,
+  Share2
 } from 'lucide-react';
 
 const sections = [
-  { id: 'summary', title: '1. Privacy at a Glance' },
-  { id: 'zero-internet', title: '2. Zero Internet & Offline Philosophy' },
-  { id: 'permissions', title: '3. Sensitive Device Permissions Declared' },
+  { id: 'summary', title: '1. Privacy at a Glance & Scope' },
+  { id: 'data-handling', title: '2. Local-First Architecture & Network Scope' },
+  { id: 'permissions', title: '3. Complete Permissions Declared' },
   { id: 'camera', title: '4. Camera Access & Intruder Selfie Policy' },
   { id: 'notifications', title: '5. Notification Listener Service Policy' },
   { id: 'installed-apps', title: '6. Installed Applications & Package Visibility' },
   { id: 'biometrics', title: '7. Biometric Authentication & App Lock' },
-  { id: 'storage', title: '8. Storage, Wallpapers & Backups' },
-  { id: 'third-parties', title: '9. Third-Party Services & SDKs' },
-  { id: 'data-deletion', title: '10. Data Retention & Deletion Policy' },
+  { id: 'storage', title: '8. Storage, Wallpapers & Local Backups' },
+  { id: 'third-parties', title: '9. Third-Party SDKs & Advertising Disclosures' },
+  { id: 'data-deletion', title: '10. Data Retention & Autonomous Erasure' },
   { id: 'children', title: '11. Children’s Privacy (COPPA & GDPR-K)' },
-  { id: 'security', title: '12. Security Architecture' },
-  { id: 'compliance', title: '13. Google Play & Global Regulations' },
+  { id: 'security', title: '12. Security Architecture & Sandboxing' },
+  { id: 'compliance', title: '13. Google Play & Global Compliance' },
   { id: 'contact', title: '14. Contact & Developer Information' },
 ];
 
 const highlights = [
   {
-    icon: <Radio size={22} className="highlight-icon text-emerald" />,
-    title: 'Zero Internet Access',
-    description: 'Milky Launcher does NOT request android.permission.INTERNET. No personal data can leave your device.',
-    badge: '100% Offline'
+    icon: <HardDrive size={22} className="highlight-icon text-cyan" />,
+    title: '100% Local-First Storage',
+    description: 'Home grids, custom folders, enlarged tiles, dock setups, and hidden apps reside solely on your device in private Room & DataStore.',
+    badge: 'On-Device Storage'
   },
   {
-    icon: <EyeOff size={22} className="highlight-icon text-cyan" />,
-    title: 'Zero Trackers or SDKs',
-    description: 'No Google Analytics, Firebase, Facebook SDK, or ad networks. Zero behavioral profiling or telemetry.',
-    badge: '0 Trackers'
+    icon: <Lock size={22} className="highlight-icon text-purple" />,
+    title: 'Hardware Biometrics & Vault',
+    description: 'App Lock and Hidden Apps Vault utilize Android hardware-backed BiometricPrompt. No biometric data ever reaches Milky Launcher.',
+    badge: 'Hardware Security'
   },
   {
-    icon: <HardDrive size={22} className="highlight-icon text-purple" />,
-    title: '100% Local Storage',
-    description: 'All settings, hidden app lists, and layouts remain strictly in private device-sandboxed Room & DataStore.',
-    badge: 'On-Device Only'
+    icon: <ShieldCheck size={22} className="highlight-icon text-emerald" />,
+    title: 'Transparent SDK Disclosures',
+    description: 'AdMob, Firebase, OneSignal, and Google Play Billing are declared with exact justifications and zero personal data selling.',
+    badge: 'Play Store Compliant'
   },
   {
     icon: <Trash2 size={22} className="highlight-icon text-amber" />,
-    title: 'Full User Control',
-    description: 'Clear intruder snapshots, reset preferences anytime, or uninstall to erase 100% of app data immediately.',
+    title: 'Autonomous Data Erasure',
+    description: 'Delete intruder photos anytime, reset launcher preferences, export local backups, or uninstall to wipe 100% of data instantly.',
     badge: 'User Controlled'
   }
 ];
 
 const permissionsList = [
   {
-    name: 'android.permission.CAMERA',
-    label: 'Camera Permission',
-    icon: <Camera size={20} />,
-    status: 'Optional (Runtime Consent Required)',
-    purpose: 'Exclusively powers the optional "Intruder Selfie" security feature under App Lock.',
-    dataAccess: 'Captures a still front-camera photo only when enabled by user AND after 3 consecutive failed unlock attempts.',
-    storage: 'Saved strictly in private app-internal storage (context.filesDir/intruder_photos). Never uploaded or shared.',
-    revocation: 'Can be revoked anytime in Android Settings > Apps > Milky Launcher > Permissions.'
+    name: 'android.permission.INTERNET',
+    label: 'Network Access',
+    icon: <Wifi size={20} />,
+    status: 'Standard Network Permission',
+    purpose: 'Powers AdMob settings banner ads, OneSignal push alerts, Google Play Billing verification, and optional external search fallback in OmniSearch.',
+    dataAccess: 'Transmits anonymous diagnostic requests and ad requests via Google Mobile Ads & Firebase. Never uploads user app lists or personal files.',
+    storage: 'Network responses cached in standard application cache; zero personal profiling data stored remotely by Milky Launcher.',
+    revocation: 'Standard Android permission.'
   },
   {
-    name: 'android.permission.BIND_NOTIFICATION_LISTENER_SERVICE',
-    label: 'Notification Listener Service',
+    name: 'com.android.vending.BILLING',
+    label: 'Google Play In-App Billing',
+    icon: <CreditCard size={20} />,
+    status: 'Google Play Service',
+    purpose: 'Facilitates secure purchases for Milky Launcher Pro (unlocking advanced features) and voluntary developer support donations.',
+    dataAccess: 'Purchase tokens and entitlement verification are handled entirely by the official Google Play Billing Library 8.0.0.',
+    storage: 'Pro unlock state cached locally in encrypted DataStore preferences. Payment cards and banking details are never seen or stored by Milky Launcher.',
+    revocation: 'Manage active subscriptions and purchases via Google Play Store > Subscriptions.'
+  },
+  {
+    name: 'android.permission.POST_NOTIFICATIONS',
+    label: 'Push Notifications (Android 13+)',
     icon: <Bell size={20} />,
-    status: 'Optional (Explicit System Settings Consent)',
-    purpose: 'Enables numeric unread counts and notification dot badges on app icons, plus shortcut previews.',
-    dataAccess: 'Reads incoming status bar notifications (package name, title, text snippet, count) purely in volatile memory.',
-    storage: 'Processed entirely in RAM. NEVER saved to persistent disk databases, never logged, never transmitted remotely.',
-    revocation: 'Can be toggled off inside Android Settings > Device & App Notifications.'
+    status: 'Runtime Permission (Opt-In)',
+    purpose: 'Delivers launcher updates, major version releases, changelogs, and critical announcement notifications via OneSignal.',
+    dataAccess: 'Generates an anonymous device push notification token with OneSignal. No personal messaging or device identity attached.',
+    storage: 'Token stored on OneSignal cloud servers for message dispatch. Discarded upon app uninstallation.',
+    revocation: 'Can be toggled off anytime in Android Settings > Apps > Milky Launcher > Notifications.'
   },
   {
-    name: 'LauncherApps & REQUEST_DELETE_PACKAGES',
-    label: 'Installed Apps & Uninstallation',
+    name: 'android.permission.REQUEST_DELETE_PACKAGES',
+    label: 'App Uninstallation Intent',
     icon: <Layers size={20} />,
-    status: 'Normal / System Managed',
-    purpose: 'Discovers installed applications to display in the app drawer/dock and triggers Android system uninstallation dialog when requested by the user.',
-    dataAccess: 'Enumerates installed package names and labels for home screen launching. Supports Android Work Profiles.',
-    storage: 'Cached locally in Room database on device for instant rendering. Never sent to any external server or advertiser.',
-    revocation: 'Core home launcher functionality.'
+    status: 'Normal Protection Level',
+    purpose: 'Enables launching Android’s official uninstallation confirmation prompt when you select "Uninstall" from an app icon’s long-press menu.',
+    dataAccess: 'Hands off the target package name to Android PackageInstaller. Milky Launcher cannot uninstall apps silently without user confirmation.',
+    storage: 'No data stored.',
+    revocation: 'Built-in launcher action.'
   },
   {
     name: 'android.permission.USE_BIOMETRIC',
     label: 'Biometric Authentication',
     icon: <Fingerprint size={20} />,
-    status: 'Standard API',
-    purpose: 'Allows unlocking locked/hidden apps and launcher settings with fingerprint or face recognition.',
-    dataAccess: 'Delegates strictly to Android BiometricPrompt API. Milky Launcher NEVER has access to biometric data or biometric keys.',
-    storage: 'Handled entirely within Android hardware-backed Secure Element / TEE.',
-    revocation: 'Can be disabled anytime in Milky Launcher Settings > App Lock.'
+    status: 'Hardware Enclave API',
+    purpose: 'Allows unlocking locked applications, the Hidden Apps Vault, and launcher settings using fingerprint or face authentication.',
+    dataAccess: 'Delegates strictly to Android native BiometricPrompt API. Milky Launcher NEVER sees or processes fingerprint scans or facial geometry.',
+    storage: 'Biometric credentials stay safely in the device hardware Secure Element / Trusted Execution Environment (TEE).',
+    revocation: 'Toggle off anytime in Milky Launcher Settings > App Lock.'
+  },
+  {
+    name: 'android.permission.CAMERA',
+    label: 'Camera Access (Intruder Selfie)',
+    icon: <Camera size={20} />,
+    status: 'Optional Runtime Permission',
+    purpose: 'Exclusively powers the optional "Intruder Selfie" feature under App Lock, capturing a silent front-facing snapshot after 3 consecutive failed unlock attempts.',
+    dataAccess: 'Captures a single front-camera snapshot via Camera2 API only when explicitly enabled by user in App Lock settings.',
+    storage: 'Saved strictly in private app-internal storage (context.filesDir/intruder_photos). Never uploaded, never synced to cloud, user-deletable at any time.',
+    revocation: 'Can be revoked anytime in Android Settings > Apps > Milky Launcher > Permissions.'
+  },
+  {
+    name: 'android.permission.BIND_NOTIFICATION_LISTENER_SERVICE',
+    label: 'Notification Listener (MilkyNotificationListener)',
+    icon: <Bell size={20} />,
+    status: 'Special System Access',
+    purpose: 'Computes unread notification counts for app icon badges/dots and provides live playback controls for the built-in Music Player Compose widget.',
+    dataAccess: 'Reads active StatusBarNotification events (app package, title snippet, count) strictly in volatile in-memory Kotlin StateFlow.',
+    storage: 'Processed entirely in RAM. NEVER written to disk, database, or transmitted remotely. Purged instantly when notification is dismissed.',
+    revocation: 'Disable anytime in Android Settings > Apps > Special App Access > Notification Access.'
   },
   {
     name: 'READ_MEDIA_IMAGES / READ_EXTERNAL_STORAGE',
-    label: 'Storage & Media Access',
+    label: 'Media & Wallpaper Access',
     icon: <HardDrive size={20} />,
-    status: 'Optional (User Initiated)',
-    purpose: 'Allows the user to select custom gallery wallpapers, load third-party icon pack assets, and export launcher backups.',
-    dataAccess: 'Only accesses files explicitly picked by the user via the system document/image picker.',
-    storage: 'No background scanning of personal photos or documents.',
+    status: 'User-Initiated Media Picker',
+    purpose: 'Allows selecting custom gallery wallpapers and loading third-party icon pack assets.',
+    dataAccess: 'Accesses only the specific image or icon file selected by you through Android’s system document picker.',
+    storage: 'Wallpaper bitmaps cached locally in app cache directory. No background scanning of device photos or files.',
     revocation: 'Manageable under system app permissions.'
   },
   {
+    name: 'android.permission.MANAGE_EXTERNAL_STORAGE',
+    label: 'Backup & Restore Management',
+    icon: <FolderLock size={20} />,
+    status: 'User-Prompted Storage Access',
+    purpose: 'Allows exporting and importing full home screen layout backups (JSON format including grid positions, widgets, and dock slots) to device storage.',
+    dataAccess: 'Reads and writes only Milky Launcher backup files created in your designated backup directory.',
+    storage: 'Maintained 100% locally under user control.',
+    revocation: 'Can be disabled in Android Settings > Special App Access > All Files Access.'
+  },
+  {
     name: 'android.permission.BIND_APPWIDGET',
-    label: 'App Widget Binding',
+    label: 'AppWidget Host Binding',
     icon: <Smartphone size={20} />,
-    status: 'Normal (System Prompted)',
-    purpose: 'Enables binding and displaying user-selected home screen widgets on the workspace canvas.',
-    dataAccess: 'Interacts with Android AppWidgetManager on-device.',
-    storage: 'Widget configurations stored locally.',
-    revocation: 'Remove individual widgets from the home screen.'
+    status: 'Standard Launcher Host API',
+    purpose: 'Binds and displays third-party Android home screen widgets on your multi-page workspace pages using LauncherAppWidgetHost.',
+    dataAccess: 'Exchanges standard widget layout measurements with Android AppWidgetManager.',
+    storage: 'Widget provider identifiers and grid coordinates saved in local Room SQLite database.',
+    revocation: 'Delete individual widgets from your home screen at any time.'
+  },
+  {
+    name: 'android.permission.PACKAGE_USAGE_STATS',
+    label: 'Usage Stats & Smart Categories',
+    icon: <Activity size={20} />,
+    status: 'Special App Access (Opt-In)',
+    purpose: 'Powers smart automatic category sorting in the app drawer (Social, Games, Media, Tools) and detects foreground app transitions for the App Lock feature.',
+    dataAccess: 'Queries Android UsageStatsManager locally on device to determine launch frequency and active foreground package.',
+    storage: 'Aggregated frequency scores stored in local SQLite database. Never sent to any external server or advertiser.',
+    revocation: 'Revoke anytime in Android Settings > Apps > Special App Access > Usage Access.'
   }
 ];
 
 export default function PrivacyPolicy({ onNavigateHome }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [copied, setCopied] = useState(false);
-  const lastUpdated = 'October 13, 2026';
-  const effectiveDate = 'October 13, 2026';
-  const appVersion = '1.1.0';
+  const lastUpdated = 'October 22, 2026';
+  const effectiveDate = 'October 22, 2026';
+  const appVersion = '0.1.0';
 
   const copyPageUrl = () => {
     if (navigator.clipboard) {
@@ -178,7 +234,8 @@ export default function PrivacyPolicy({ onNavigateHome }) {
               aria-label="Back to Homepage"
             >
               <ArrowLeft size={16} />
-              <span>Back to Home</span>
+              <span className="btn-text-full">Back to Home</span>
+              <span className="btn-text-short">Back</span>
             </button>
             
             <div className="header-brand-divider" />
@@ -189,7 +246,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
                 alt="Milky Launcher Icon" 
                 className="brand-logo-mini" 
               />
-              <div>
+              <div className="brand-text-col">
                 <span className="brand-name-mini">Milky Launcher</span>
                 <span className="brand-sub-mini">Privacy Policy</span>
               </div>
@@ -203,7 +260,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
               title="Copy URL to clipboard"
             >
               {copied ? <Check size={14} className="text-emerald" /> : <Copy size={14} />}
-              <span>{copied ? 'Copied Link!' : 'Share Policy'}</span>
+              <span className="btn-action-label">{copied ? 'Copied Link!' : 'Share Policy'}</span>
             </button>
 
             <button 
@@ -212,7 +269,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
               title="Print or Save PDF"
             >
               <Printer size={14} />
-              <span>Print / PDF</span>
+              <span className="btn-action-label">Print / PDF</span>
             </button>
           </div>
         </div>
@@ -225,33 +282,34 @@ export default function PrivacyPolicy({ onNavigateHome }) {
           <div className="hero-badge-row">
             <span className="compliance-badge">
               <ShieldCheck size={15} />
-              <span>Google Play Policy Compliant</span>
+              <span>Google Play Compliant</span>
             </span>
             <span className="version-pill">v{appVersion} Production</span>
+            <span className="package-pill">com.skdevs.milkylauncher</span>
           </div>
 
           <h1 className="privacy-hero-title">Privacy Policy</h1>
           <p className="privacy-hero-subtitle">
-            Milky Launcher is built with a zero-compromise privacy-by-design philosophy: 
-            <strong> completely offline, 100% on-device processing, zero trackers, and zero remote data collection.</strong>
+            Official Privacy & Data Protection Policy for <strong>Milky Launcher</strong> on Google Play. 
+            Engineered with a local-first architecture, transparent permissions, hardware biometrics, and verified third-party disclosures.
           </p>
 
           <div className="meta-info-grid">
             <div className="meta-item">
               <span className="meta-label">Application</span>
-              <span className="meta-value">Milky Launcher</span>
+              <span className="meta-value">Milky Launcher (v{appVersion})</span>
+            </div>
+            <div className="meta-item">
+              <span className="meta-label">Package Name</span>
+              <span className="meta-value code-snippet">com.skdevs.milkylauncher</span>
             </div>
             <div className="meta-item">
               <span className="meta-label">Developers</span>
-              <span className="meta-value">Krishna Vishwakarma & Satyakiran (skdevs)</span>
+              <span className="meta-value">Krishna Vishwakarma &amp; Satyakiran (skdevs)</span>
             </div>
             <div className="meta-item">
               <span className="meta-label">Effective Date</span>
               <span className="meta-value">{effectiveDate}</span>
-            </div>
-            <div className="meta-item">
-              <span className="meta-label">Last Modified</span>
-              <span className="meta-value">{lastUpdated}</span>
             </div>
           </div>
         </div>
@@ -278,7 +336,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
             <summary className="mobile-toc-summary">
               <span className="mts-title">
                 <FileText size={15} />
-                <span>Table of Contents (Jump to Section)</span>
+                <span>Table of Contents</span>
               </span>
               <span className="mts-badge">14 Sections</span>
             </summary>
@@ -322,7 +380,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
                   <Shield size={14} className="text-emerald" />
                   <span>Privacy Inquiries</span>
                 </div>
-                <p className="sc-text">Questions about data protection in Milky Launcher?</p>
+                <p className="sc-text">Questions regarding privacy or Google Play disclosures?</p>
                 <a 
                   href="https://t.me/milkylc" 
                   target="_blank" 
@@ -341,60 +399,82 @@ export default function PrivacyPolicy({ onNavigateHome }) {
 
             {/* Section 1 */}
             <section id="summary" className="policy-section">
-              <h2 className="section-title">1. Privacy at a Glance</h2>
+              <h2 className="section-title">1. Privacy at a Glance & Scope</h2>
               <p>
-                Thank you for using <strong>Milky Launcher</strong> (“the App”), an Android home screen launcher 
+                Welcome to <strong>Milky Launcher</strong> (“the App”), an Android home screen launcher 
                 developed by <strong>Krishna Vishwakarma and Satyakiran (skdevs)</strong>.
               </p>
               <p>
-                This Privacy Policy provides clear, transparent, and comprehensive information regarding how Milky Launcher 
-                handles user information, device permissions, and system resources. 
-                Our core philosophy is simple: <strong>your launcher is your personal sanctuary.</strong> 
-                Milky Launcher was engineered from the ground up to never transmit, collect, monetize, or harvest any personal data.
+                This Privacy Policy establishes clear, legally binding, and complete disclosures regarding how Milky Launcher 
+                accesses, handles, stores, and protects user data and device permissions. We believe your launcher is your daily digital sanctuary. 
+                Our architectural principle is <strong>local-first processing</strong>: your customized home grids, custom folders, app layouts, 
+                and settings reside on your device.
               </p>
 
               <div className="callout callout-success">
                 <CheckCircle2 size={20} className="callout-icon" />
                 <div className="callout-content">
-                  <strong>The Golden Rule:</strong> Milky Launcher does not transmit personal data, usage data, crash logs, 
-                  or device identifiers to any server. We have no remote backend, no cloud database, and no telemetry system.
+                  <strong>Core Promise:</strong> Milky Launcher never sells, rents, or monetizes personal data. 
+                  All personal customizations, hidden apps, and intruder photos remain in private device-sandboxed storage. 
+                  Third-party services (AdMob, OneSignal, Firebase, and Google Play Billing) are strictly restricted to their designated utility functions.
                 </div>
               </div>
             </section>
 
             {/* Section 2 */}
-            <section id="zero-internet" className="policy-section">
-              <h2 className="section-title">2. Zero Internet & Offline Philosophy</h2>
+            <section id="data-handling" className="policy-section">
+              <h2 className="section-title">2. Local-First Architecture & Network Scope</h2>
               <p>
-                Unlike many commercial Android launchers that bundle tracking SDKs, cloud ad feeds, or analytics agents, 
-                Milky Launcher is built as an <strong>offline-first utility</strong>.
+                Milky Launcher is built with a modular clean architecture in Kotlin and Jetpack Compose. 
+                Data generated by the launcher is partitioned between strictly local databases and verified external endpoints:
+              </p>
+              
+              <h3>Local Device Storage</h3>
+              <ul>
+                <li>
+                  <strong>SQLite Room Database (<code>MilkyDatabase</code>):</strong> Stores home screen page counts, mathematical grid coordinates, 
+                  custom folder structures, 2x2 enlarged folder configurations, dock icon slots, and hidden application lists.
+                </li>
+                <li>
+                  <strong>Jetpack DataStore Preferences:</strong> Persists appearance settings, AMOLED Pure Black toggles, 
+                  Apple Glass acrylic styles, icon shapes, dock background opacity, and app lock preferences.
+                </li>
+                <li>
+                  <strong>Zero Personal Data Cloud Upload:</strong> Milky Launcher maintains no proprietary cloud servers, user accounts, 
+                  or external databases. Your device state remains in your device storage sandbox.
+                </li>
+              </ul>
+
+              <h3>Network Access Scope (<code>android.permission.INTERNET</code>)</h3>
+              <p>
+                Network communication is invoked strictly for the following verified functions:
               </p>
               <ul>
                 <li>
-                  <strong>No Network Permission:</strong> Milky Launcher’s Android manifest does not declare or request the 
-                  <code>android.permission.INTERNET</code> permission. Android OS strictly prohibits applications without this 
-                  permission from making outbound TCP/UDP network connections.
+                  <strong>AdMob Banner Display:</strong> Serving non-intrusive banner advertisements inside launcher settings via Google Mobile Ads SDK.
                 </li>
                 <li>
-                  <strong>No Cloud Servers:</strong> The developers maintain zero servers to collect, receive, or store your launcher information.
+                  <strong>Push Notification Service:</strong> Receiving release notes, changelogs, and version announcements via OneSignal SDK.
                 </li>
                 <li>
-                  <strong>Web Search Delegation:</strong> When you perform a search in the app drawer that does not match any installed app, 
-                  you may optionally tap the web search shortcut. This action uses an Android standard intent 
-                  (<code>Intent.ACTION_WEB_SEARCH</code>) to pass your query directly to your device’s default web browser 
-                  (such as Google Chrome, Firefox, or Brave). Milky Launcher does not log, save, or intercept this query; 
-                  the search is executed entirely within your external browser according to that browser's privacy policy.
+                  <strong>In-App Billing Validation:</strong> Verifying Milky Launcher Pro entitlement status and processing voluntary donations via Google Play Billing.
+                </li>
+                <li>
+                  <strong>Anonymous Diagnostic Analytics:</strong> Firebase Analytics telemetry for aggregate crash detection and scroll performance monitoring.
+                </li>
+                <li>
+                  <strong>Web Search Redirection:</strong> Optional user-tapped web search button in OmniSearch, which launches your external default web browser.
                 </li>
               </ul>
             </section>
 
             {/* Section 3 */}
             <section id="permissions" className="policy-section">
-              <h2 className="section-title">3. Sensitive Device Permissions Declared</h2>
+              <h2 className="section-title">3. Complete Permissions Declared</h2>
               <p>
-                To provide standard launcher functionality and enhanced device security, Milky Launcher declares specific Android 
-                permissions. In accordance with <strong>Google Play’s User Data & Permissions Policy</strong>, each permission, 
-                its exact justification, and its on-device scope are detailed below:
+                To provide Android home screen replacement features and device security, Milky Launcher declares specific Android 
+                permissions in its manifest (<code>app/src/main/AndroidManifest.xml</code>). In compliance with <strong>Google Play’s User Data &amp; Permissions Policy</strong>, 
+                each permission, its exact justification, and its on-device scope are detailed below:
               </p>
 
               {/* Search Filter for Permissions */}
@@ -402,7 +482,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
                 <Search size={16} className="perm-search-icon" />
                 <input 
                   type="text"
-                  placeholder="Filter declared permissions (e.g., Camera, Notifications, Storage)..."
+                  placeholder="Filter permissions (e.g., Camera, Internet, Billing, Notifications)..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="perm-search-input"
@@ -442,11 +522,11 @@ export default function PrivacyPolicy({ onNavigateHome }) {
                         <span className="perm-value">{perm.dataAccess}</span>
                       </div>
                       <div className="perm-row">
-                        <span className="perm-field">Storage & Sharing:</span>
+                        <span className="perm-field">Storage &amp; Scope:</span>
                         <span className="perm-value">{perm.storage}</span>
                       </div>
                       <div className="perm-row">
-                        <span className="perm-field">Revocation:</span>
+                        <span className="perm-field">Revocation / Control:</span>
                         <span className="perm-value">{perm.revocation}</span>
                       </div>
                     </div>
@@ -459,38 +539,38 @@ export default function PrivacyPolicy({ onNavigateHome }) {
             <section id="camera" className="policy-section">
               <h2 className="section-title">4. Camera Access & Intruder Selfie Policy</h2>
               <p>
-                Milky Launcher includes an optional, security-oriented feature called <strong>App Lock Intruder Selfie</strong>.
+                Milky Launcher includes an optional, security-focused feature called <strong>App Lock Intruder Selfie</strong>.
               </p>
               
               <div className="callout callout-info">
                 <Camera size={20} className="callout-icon" />
                 <div className="callout-content">
-                  <strong>Prominent Disclosure:</strong> The camera is <em>only</em> accessed if you explicitly navigate to 
+                  <strong>Prominent Disclosure:</strong> The camera is <em>only</em> invoked if you navigate to 
                   <code>Settings &gt; App Lock</code>, enable the <em>Intruder Selfie</em> toggle, and grant Android’s runtime 
-                  Camera permission dialog.
+                  Camera permission prompt.
                 </div>
               </div>
 
               <h3>How the Intruder Selfie Feature Operates:</h3>
               <ol>
                 <li>
-                  <strong>Trigger Condition:</strong> When App Lock is active, if an incorrect PIN, password, or biometric pattern 
-                  is entered <strong>3 consecutive times</strong>, the app activates the device's front-facing camera via Android’s 
-                  hardware <code>Camera2 API</code> to take a single silent snapshot of the intruder.
+                  <strong>Trigger Condition:</strong> When App Lock is active, if an incorrect PIN, password, or pattern 
+                  is entered <strong>3 consecutive times</strong>, the launcher activates the front-facing camera via Android’s 
+                  <code>Camera2 API</code> to capture a single silent security snapshot of the unauthorized user.
                 </li>
                 <li>
-                  <strong>Local Storage Only:</strong> The photo is saved exclusively into the application’s private internal storage directory 
-                  (<code>context.filesDir/intruder_photos</code>). This sandbox directory is protected by Android's application isolation 
-                  and cannot be read by other third-party apps without root access.
+                  <strong>Private App Storage Only:</strong> The photo is saved strictly into the application’s private internal storage directory 
+                  (<code>context.filesDir/intruder_photos</code>). This directory is protected by Android OS application sandboxing and cannot 
+                  be accessed by third-party applications without root access.
                 </li>
                 <li>
-                  <strong>Zero Transmission:</strong> Captured images are <strong>never</strong> transmitted over the internet, never backed up to cloud servers, 
+                  <strong>Zero Network Transmission:</strong> Captured images are <strong>never</strong> uploaded to cloud storage, never sent over the internet, 
                   and never visible to anyone other than the device owner.
                 </li>
                 <li>
-                  <strong>User Inspection & Deletion:</strong> You can view all captured intruder selfies inside Milky Launcher’s App Lock settings. 
-                  You can delete any single photo or choose <em>"Clear All Intruder Photos"</em> at any time. Revoking Camera permission or uninstalling 
-                  the app instantly erases all intruder photos.
+                  <strong>User Inspection &amp; Deletion:</strong> You can review all captured photos inside Milky Launcher’s App Lock settings. 
+                  You can delete individual photos or tap <em>"Clear All Intruder Photos"</em> at any time. Revoking Camera permissions or uninstalling 
+                  the app instantly erases all stored photos.
                 </li>
               </ol>
             </section>
@@ -500,7 +580,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
               <h2 className="section-title">5. Notification Listener Service Policy</h2>
               <p>
                 Milky Launcher declares <code>MilkyNotificationListener</code>, an Android 
-                <code>NotificationListenerService</code>, to support home screen notification indicators.
+                <code>NotificationListenerService</code>, to support home screen notification badges and Compose widget integrations.
               </p>
               
               <div className="callout callout-info">
@@ -514,20 +594,20 @@ export default function PrivacyPolicy({ onNavigateHome }) {
               <h3>Scope of Notification Data Usage:</h3>
               <ul>
                 <li>
-                  <strong>Unread Counts & Badges:</strong> The service receives active <code>StatusBarNotification</code> events to compute the number of unread 
-                  notifications for each installed application and display notification dots or numeric badges over that app’s icon.
+                  <strong>Unread Counts &amp; Badges:</strong> The service receives active <code>StatusBarNotification</code> events to compute unread 
+                  counts for each installed application and display notification dots or numeric badges over that app’s icon.
                 </li>
                 <li>
-                  <strong>Quick Actions:</strong> If you long-press an app icon on your home screen or dock, Milky Launcher displays the title and summary 
-                  of active notifications so you can quickly launch the relevant pending intent or dismiss the notification.
+                  <strong>Interactive Music Player Widget:</strong> Extracts playback status, track title, and artist name to provide live animated equalizer 
+                  bars and playback controls on the home screen.
                 </li>
                 <li>
-                  <strong>Volatile Memory Only:</strong> All notification metadata (title, text snippet, timestamp) is maintained strictly in volatile RAM 
+                  <strong>Volatile Memory Only (RAM):</strong> All notification metadata is maintained strictly in volatile RAM 
                   (in-memory Kotlin <code>StateFlow</code>). It is <strong>never written to a Room database or permanent file storage</strong>.
                 </li>
                 <li>
                   <strong>Immediate Wiping:</strong> The moment a notification is dismissed by you or cancelled by the originating application, 
-                  it is purged from Milky Launcher’s memory cache immediately.
+                  it is purged from memory immediately.
                 </li>
               </ul>
             </section>
@@ -540,8 +620,8 @@ export default function PrivacyPolicy({ onNavigateHome }) {
               </p>
               <ul>
                 <li>
-                  <strong>LauncherApps Framework:</strong> Milky Launcher uses Android’s official <code>LauncherApps</code> system API 
-                  (rather than broad package queries) to discover launchable applications, load their high-resolution adaptive icons, 
+                  <strong>Official LauncherApps Framework:</strong> Milky Launcher uses Android’s official <code>LauncherApps</code> system API 
+                  (rather than broad package queries) to discover launchable applications, load high-resolution adaptive icons, 
                   and support Android Work Profiles with enterprise badges.
                 </li>
                 <li>
@@ -550,8 +630,8 @@ export default function PrivacyPolicy({ onNavigateHome }) {
                   the removal; Milky Launcher cannot uninstall applications silently.
                 </li>
                 <li>
-                  <strong>On-Device Database:</strong> Your installed app list, custom label overrides, hidden app flags, and dock ordering 
-                  are stored in a local SQLite Room database located in your device's internal storage. They are never uploaded or aggregated.
+                  <strong>Smart App Categorization:</strong> Using <code>ApplicationInfo.category</code> and local usage statistics, apps are grouped into categories 
+                  (Google, Social, Media, Games, Tools, Work). This classification is calculated 100% on-device.
                 </li>
               </ul>
             </section>
@@ -560,7 +640,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
             <section id="biometrics" className="policy-section">
               <h2 className="section-title">7. Biometric Authentication & App Lock</h2>
               <p>
-                Milky Launcher allows you to protect specific applications, hidden app drawers, and launcher preferences with biometric security:
+                Milky Launcher allows you to protect individual applications, hidden app drawers, and launcher preferences with biometric security:
               </p>
               <ul>
                 <li>
@@ -577,18 +657,18 @@ export default function PrivacyPolicy({ onNavigateHome }) {
 
             {/* Section 8 */}
             <section id="storage" className="policy-section">
-              <h2 className="section-title">8. Storage, Wallpapers & Backups</h2>
+              <h2 className="section-title">8. Storage, Wallpapers & Local Backups</h2>
               <p>
                 Milky Launcher interacts with device storage solely upon your direct initiative:
               </p>
               <ul>
                 <li>
-                  <strong>Wallpapers & Icons:</strong> When you select a custom wallpaper or apply a third-party icon pack, 
+                  <strong>Wallpapers &amp; Icons:</strong> When you select a custom wallpaper or apply a third-party icon pack, 
                   Milky Launcher reads only the selected assets chosen via the system document picker.
                 </li>
                 <li>
-                  <strong>Backup & Restore:</strong> Milky Launcher offers a feature to export your home screen grid, shortcuts, 
-                  and preferences to a local JSON backup file. This file is stored in your device's Downloads or user-designated folder. 
+                  <strong>Local Backup &amp; Restore:</strong> Milky Launcher includes a feature to export your home screen grid, shortcuts, 
+                  and preferences to a local JSON backup file. This file is saved in your device's Downloads or user-designated folder. 
                   You maintain complete custody of this file; it is never automatically uploaded to any cloud service.
                 </li>
               </ul>
@@ -596,48 +676,63 @@ export default function PrivacyPolicy({ onNavigateHome }) {
 
             {/* Section 9 */}
             <section id="third-parties" className="policy-section">
-              <h2 className="section-title">9. Third-Party Services & SDKs</h2>
+              <h2 className="section-title">9. Third-Party SDKs & Advertising Disclosures</h2>
               <p>
-                Milky Launcher takes pride in being completely tracker-free:
+                In strict compliance with <strong>Google Play’s Developer Program Policies on Third-Party SDKs and Monetization</strong>, 
+                Milky Launcher uses the following verified third-party libraries:
               </p>
-              <table className="policy-table">
-                <thead>
-                  <tr>
-                    <th>Category</th>
-                    <th>Third-Party Services Used</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Advertising SDKs</td>
-                    <td>None (No AdMob, Unity, AppLovin, etc.)</td>
-                    <td><span className="badge-pill badge-play">100% Ad-Free</span></td>
-                  </tr>
-                  <tr>
-                    <td>Analytics & Telemetry</td>
-                    <td>None (No Google Analytics, Firebase, Mixpanel)</td>
-                    <td><span className="badge-pill badge-play">Zero Telemetry</span></td>
-                  </tr>
-                  <tr>
-                    <td>Crash Reporting Services</td>
-                    <td>None (No Crashlytics, Sentry, Bugsnag)</td>
-                    <td><span className="badge-pill badge-play">Zero Remote Logs</span></td>
-                  </tr>
-                  <tr>
-                    <td>Social & Tracking Trackers</td>
-                    <td>None (No Facebook Graph, TikTok, Adjust)</td>
-                    <td><span className="badge-pill badge-play">No User Tracking</span></td>
-                  </tr>
-                </tbody>
-              </table>
+              
+              <div className="table-responsive-wrapper">
+                <table className="policy-table">
+                  <thead>
+                    <tr>
+                      <th>Service / SDK</th>
+                      <th>Identifier / Version</th>
+                      <th>Purpose</th>
+                      <th>Data Collected</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Google Mobile Ads (AdMob)</strong></td>
+                      <td><code>ca-app-pub-8300386079649281~5905394290</code> (SDK 23.6.0)</td>
+                      <td>Displays non-intrusive banner ads in Settings</td>
+                      <td>Advertising ID (if enabled), coarse device metrics, diagnostics</td>
+                    </tr>
+                    <tr>
+                      <td><strong>OneSignal Push</strong></td>
+                      <td><code>a991bcf0-7e69-456b-955a-1e90ae7e7847</code> (SDK 5.10.2)</td>
+                      <td>Delivers feature updates, changelogs, and release alerts</td>
+                      <td>Anonymous device push token, Android OS version</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Google Play Billing</strong></td>
+                      <td>Google Play Billing Library 8.0.0</td>
+                      <td>Processes Milky Launcher Pro upgrades and donations</td>
+                      <td>Purchase tokens verified by Google Play; no credit card data</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Firebase Analytics</strong></td>
+                      <td>Firebase BoM 33.10.0</td>
+                      <td>Anonymous app stability and crash rate diagnostics</td>
+                      <td>Aggregate performance telemetry, device model, crash stacks</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p className="sub-policy-text">
+                For more details on how these providers handle information, please consult 
+                <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="inline-link"> Google’s Advertising Privacy Policy</a> and 
+                <a href="https://onesignal.com/privacy_policy" target="_blank" rel="noopener noreferrer" className="inline-link"> OneSignal’s Privacy Policy</a>.
+              </p>
             </section>
 
             {/* Section 10 */}
             <section id="data-deletion" className="policy-section">
-              <h2 className="section-title">10. Data Retention & Deletion Policy</h2>
+              <h2 className="section-title">10. Data Retention & Autonomous Erasure</h2>
               <p>
-                Because all data generated by Milky Launcher is stored locally on your device, <strong>you have complete, autonomous control over its retention and deletion:</strong>
+                Because all user preferences and configurations reside locally on your device, <strong>you possess full autonomy over data retention and permanent deletion:</strong>
               </p>
               <div className="deletion-steps-card">
                 <h3>How to Erase Your Data:</h3>
@@ -646,8 +741,11 @@ export default function PrivacyPolicy({ onNavigateHome }) {
                     <strong>Clear Intruder Selfies:</strong> Open Milky Launcher <code>Settings &gt; App Lock &gt; Intruder Photos</code> and tap <em>"Clear All Photos"</em>.
                   </li>
                   <li>
-                    <strong>Reset All Launcher Data:</strong> Go to Android <code>Settings &gt; Apps &gt; Milky Launcher &gt; Storage & Cache &gt; Clear Storage</code>. 
+                    <strong>Reset All Launcher Data:</strong> Go to Android <code>Settings &gt; Apps &gt; Milky Launcher &gt; Storage &amp; Cache &gt; Clear Storage</code>. 
                     This permanently wipes all local SQLite databases, DataStore preferences, cached icons, and intruder photos.
+                  </li>
+                  <li>
+                    <strong>Opt Out of Personalized Ads:</strong> In Android <code>Settings &gt; Google &gt; Ads</code>, tap <em>"Delete Advertising ID"</em> to prevent AdMob from delivering interest-based advertisements.
                   </li>
                   <li>
                     <strong>Uninstall the App:</strong> Drag Milky Launcher to <em>"Uninstall"</em> or remove it via Google Play. 
@@ -661,15 +759,15 @@ export default function PrivacyPolicy({ onNavigateHome }) {
             <section id="children" className="policy-section">
               <h2 className="section-title">11. Children’s Privacy (COPPA & GDPR-K Compliance)</h2>
               <p>
-                Milky Launcher does not knowingly collect, request, or store any personal information from children under the age of 13 
-                (or under 16 within the European Economic Area). Because the application collects no personal data from any user whatsoever, 
-                it is fully compliant with the <strong>Children’s Online Privacy Protection Act (COPPA)</strong> and <strong>Article 8 of the GDPR</strong>.
+                Milky Launcher is a general audience personalization tool and is not directed to children under 13 years of age 
+                (or under 16 in the European Economic Area). The app does not knowingly collect or solicit personal information from children. 
+                We comply with the <strong>Children’s Online Privacy Protection Act (COPPA)</strong> and European GDPR-K guidelines.
               </p>
             </section>
 
             {/* Section 12 */}
             <section id="security" className="policy-section">
-              <h2 className="section-title">12. Security Architecture</h2>
+              <h2 className="section-title">12. Security Architecture & Sandboxing</h2>
               <p>
                 We employ industry-standard architectural safeguards to keep your local data safe:
               </p>
@@ -682,20 +780,19 @@ export default function PrivacyPolicy({ onNavigateHome }) {
                   <strong>Hardware-Backed Biometrics:</strong> Biometric operations rely exclusively on the device’s hardware security enclave.
                 </li>
                 <li>
-                  <strong>Zero Network Attack Surface:</strong> With no network permissions, open sockets, or cloud synchronization endpoints, 
-                  Milky Launcher presents zero external vector for data interception or unauthorized remote exfiltration.
+                  <strong>ProGuard &amp; Code Hardening:</strong> Release builds are obfuscated with R8/ProGuard to prevent reverse-engineering of security controls.
                 </li>
               </ul>
             </section>
 
             {/* Section 13 */}
             <section id="compliance" className="policy-section">
-              <h2 className="section-title">13. Google Play & Global Regulations</h2>
+              <h2 className="section-title">13. Google Play & Global Compliance</h2>
               <p>
                 This privacy policy has been composed to satisfy and uphold:
               </p>
               <ul>
-                <li><strong>Google Play Developer Distribution Agreement & User Data Policies</strong></li>
+                <li><strong>Google Play Developer Distribution Agreement &amp; User Data Policies</strong></li>
                 <li><strong>European Union General Data Protection Regulation (GDPR)</strong></li>
                 <li><strong>California Consumer Privacy Act (CCPA) / CPRA</strong></li>
                 <li><strong>Children’s Online Privacy Protection Act (COPPA)</strong></li>
@@ -703,7 +800,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
               <p>
                 Under GDPR and CCPA, users have rights regarding data access, rectification, portability, and erasure. 
                 Because all data is maintained exclusively on your physical device, you can exercise these rights directly at any time 
-                via the device settings.
+                via your Android device settings.
               </p>
             </section>
 
@@ -721,7 +818,7 @@ export default function PrivacyPolicy({ onNavigateHome }) {
                   className="contact-box glass-panel contact-link-box contact-email-highlight"
                   title="Send email to satyakiran296@gmail.com"
                 >
-                  <span className="cb-label">Official Support & Privacy Email</span>
+                  <span className="cb-label">Official Support &amp; Privacy Email</span>
                   <strong className="cb-val email-val">satyakiran296@gmail.com</strong>
                   <span className="cb-sub">Direct developer contact for inquiries <Mail size={12} /></span>
                 </a>
@@ -738,9 +835,9 @@ export default function PrivacyPolicy({ onNavigateHome }) {
                   rel="noopener noreferrer" 
                   className="contact-box glass-panel contact-link-box"
                 >
-                  <span className="cb-label">Developer Website</span>
+                  <span className="cb-label">Developer Studio</span>
                   <strong className="cb-val">skdev.psatyakiran.in</strong>
-                  <span className="cb-sub">Visit portfolio &amp; releases <ExternalLink size={12} /></span>
+                  <span className="cb-sub">Visit studio portfolio &amp; apps <ExternalLink size={12} /></span>
                 </a>
 
                 <a 
@@ -759,37 +856,38 @@ export default function PrivacyPolicy({ onNavigateHome }) {
             {/* Footer Notice */}
             <div className="policy-end-note">
               <p>
-                <strong>Policy Revisions:</strong> We may update this Privacy Policy from time to time to reflect changes in legal requirements 
-                or future enhancements to Milky Launcher. Any modifications will be posted here with an updated "Last Modified" date.
+                © 2026 Milky Launcher. Developed by <strong>Krishna Vishwakarma &amp; Satyakiran (skdevs)</strong>. 
+                All rights reserved. Target Google Play Launch: November 19, 2026.
               </p>
-              <div className="back-bottom-row">
-                <button onClick={onNavigateHome} className="btn-cosmic">
-                  <ArrowLeft size={16} />
-                  <span>Return to Milky Launcher Homepage</span>
-                </button>
-              </div>
             </div>
 
           </article>
         </div>
       </main>
 
-      {/* Clean Minimal Footer */}
-      <footer className="privacy-footer">
-        <p>
-          © 2026 Milky Launcher. Developed with passion by{' '}
-          <a href="https://github.com/Spyou" target="_blank" rel="noopener noreferrer" className="footer-dev-link">Krishna Vishwakarma</a>{' '}
-          &{' '}
-          <a href="https://skdev.psatyakiran.in/" target="_blank" rel="noopener noreferrer" className="footer-dev-link">Satyakiran</a>.
-        </p>
-        <div className="footer-links">
-          <button onClick={onNavigateHome} className="footer-text-btn">Home</button>
-          <span className="sep">•</span>
-          <a href="https://t.me/milkylc" target="_blank" rel="noopener noreferrer">Telegram: @milkylc</a>
-          <span className="sep">•</span>
-          <a href="https://skdev.psatyakiran.in/" target="_blank" rel="noopener noreferrer">skdev.psatyakiran.in</a>
-          <span className="sep">•</span>
-          <span>Google Play Store Compliant</span>
+      {/* Footer */}
+      <footer className="privacy-footer print-hide">
+        <div className="footer-content">
+          <div className="footer-links">
+            <button onClick={onNavigateHome} className="footer-nav-link">
+              Milky Launcher Home
+            </button>
+            <span className="sep">•</span>
+            <a href="https://t.me/milkylc" target="_blank" rel="noopener noreferrer" className="footer-nav-link">
+              Telegram Community
+            </a>
+            <span className="sep">•</span>
+            <a href="https://skdev.psatyakiran.in/" target="_blank" rel="noopener noreferrer" className="footer-nav-link">
+              skdevs Studio
+            </a>
+            <span className="sep">•</span>
+            <a href="mailto:satyakiran296@gmail.com" className="footer-nav-link">
+              Contact Developers
+            </a>
+          </div>
+          <p className="footer-copy">
+            Google Play and the Google Play logo are trademarks of Google LLC.
+          </p>
         </div>
       </footer>
     </div>

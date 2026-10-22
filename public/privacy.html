@@ -6,7 +6,7 @@
     
     <title>Privacy Policy – Milky Launcher | Official Google Play Policy</title>
     <meta name="title" content="Privacy Policy – Milky Launcher | Official Google Play Policy" />
-    <meta name="description" content="Official Privacy Policy for Milky Launcher on Google Play. 100% offline, zero internet access, zero trackers, and complete on-device data processing." />
+    <meta name="description" content="Official Google Play Privacy Policy for Milky Launcher (com.skdevs.milkylauncher). Local-first architecture, transparent permissions, hardware biometrics, and verified third-party disclosures." />
     <meta name="author" content="Krishna Vishwakarma, Satyakiran (skdevs)" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#070A14" />
@@ -46,6 +46,12 @@
         padding: 0;
       }
 
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+      }
+
       body {
         background-color: var(--void);
         color: var(--starlight);
@@ -60,11 +66,13 @@
       body::before {
         content: '';
         position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: 
-          radial-gradient(circle at 20% 15%, rgba(159, 196, 255, 0.08) 0%, transparent 45%),
-          radial-gradient(circle at 80% 25%, rgba(46, 85, 160, 0.12) 0%, transparent 50%),
-          radial-gradient(circle at 50% 80%, rgba(1, 135, 95, 0.06) 0%, transparent 50%);
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 900px;
+        max-width: 100vw;
+        height: 500px;
+        background: radial-gradient(circle, rgba(159, 196, 255, 0.08) 0%, transparent 70%);
         pointer-events: none;
         z-index: 0;
       }
@@ -72,12 +80,14 @@
       header {
         position: sticky;
         top: 0;
-        z-index: 50;
-        background: rgba(7, 10, 20, 0.85);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        z-index: 100;
+        background: rgba(7, 10, 20, 0.9);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--card-border);
-        padding: 14px 24px;
+        padding: 12px 24px;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .header-wrap {
@@ -86,6 +96,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 12px;
+        min-width: 0;
       }
 
       .brand {
@@ -94,25 +106,35 @@
         gap: 12px;
         text-decoration: none;
         color: var(--starlight);
+        min-width: 0;
       }
 
       .brand img {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
-        border: 1px solid rgba(159, 196, 255, 0.3);
+        border: 1px solid rgba(159, 196, 255, 0.25);
+        flex-shrink: 0;
       }
 
       .brand-title {
         font-family: 'Outfit', sans-serif;
         font-weight: 700;
         font-size: 1.05rem;
+        display: block;
+        line-height: 1.15;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .brand-subtitle {
         font-size: 0.76rem;
         color: var(--haze);
         display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .nav-btn {
@@ -128,6 +150,8 @@
         font-size: 0.84rem;
         font-weight: 600;
         transition: all 0.2s ease;
+        flex-shrink: 0;
+        white-space: nowrap;
       }
 
       .nav-btn:hover {
@@ -140,8 +164,11 @@
         position: relative;
         z-index: 1;
         max-width: 1100px;
+        width: 100%;
+        box-sizing: border-box;
         margin: 0 auto;
         padding: 36px 20px 80px 20px;
+        min-width: 0;
       }
 
       .hero {
@@ -151,93 +178,108 @@
         padding: 40px;
         text-align: center;
         margin-bottom: 32px;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .badge-row {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: center;
         gap: 10px;
         margin-bottom: 16px;
-        flex-wrap: wrap;
       }
 
       .badge-verified {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 6px 14px;
-        border-radius: var(--radius-full);
-        background: rgba(1, 135, 95, 0.15);
-        border: 1px solid rgba(1, 135, 95, 0.4);
-        color: var(--success);
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         font-weight: 600;
+        background: rgba(1, 135, 95, 0.18);
+        color: #3ddc97;
+        border: 1px solid rgba(1, 135, 95, 0.35);
+        padding: 4px 12px;
+        border-radius: var(--radius-full);
       }
 
       .badge-version {
-        display: inline-flex;
-        align-items: center;
-        padding: 6px 12px;
-        border-radius: var(--radius-full);
-        background: rgba(159, 196, 255, 0.1);
-        border: 1px solid rgba(159, 196, 255, 0.2);
-        color: var(--beam);
         font-size: 0.8rem;
+        font-weight: 600;
+        background: rgba(159, 196, 255, 0.12);
+        color: var(--beam);
+        border: 1px solid rgba(159, 196, 255, 0.25);
+        padding: 4px 12px;
+        border-radius: var(--radius-full);
+      }
+
+      .badge-package {
+        font-size: 0.76rem;
         font-family: 'JetBrains Mono', monospace;
+        background: rgba(168, 85, 247, 0.12);
+        color: #c084fc;
+        border: 1px solid rgba(168, 85, 247, 0.25);
+        padding: 4px 12px;
+        border-radius: var(--radius-full);
+        word-break: break-all;
       }
 
       h1 {
         font-family: 'Outfit', sans-serif;
-        font-size: clamp(2.2rem, 4vw, 3rem);
+        font-size: 2.6rem;
         font-weight: 800;
-        letter-spacing: -0.03em;
-        margin-bottom: 14px;
-        background: linear-gradient(135deg, #ffffff 0%, #cbd8ff 70%, #9fc4ff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.02em;
+        margin-bottom: 12px;
+        color: #ffffff;
+        word-break: break-word;
       }
 
       .hero p {
-        color: var(--haze);
         font-size: 1.05rem;
+        color: #cbd5e1;
         max-width: 760px;
         margin: 0 auto 24px auto;
+        line-height: 1.6;
+        word-break: break-word;
       }
 
       .meta-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 14px;
-        padding-top: 20px;
-        border-top: 1px solid rgba(138, 147, 178, 0.15);
-        max-width: 860px;
-        margin: 0 auto;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        padding-top: 24px;
+        border-top: 1px solid var(--card-border);
         text-align: left;
       }
 
       .meta-col {
         display: flex;
         flex-direction: column;
+        gap: 4px;
+        min-width: 0;
       }
 
       .meta-label {
-        font-size: 0.72rem;
-        text-transform: uppercase;
+        font-size: 0.74rem;
         color: var(--haze);
+        text-transform: uppercase;
         letter-spacing: 0.05em;
+        font-weight: 600;
       }
 
       .meta-val {
         font-size: 0.92rem;
-        font-weight: 600;
         color: var(--starlight);
+        font-weight: 600;
+        word-break: break-word;
+        overflow-wrap: anywhere;
       }
 
       /* Highlights */
       .highlights {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
         gap: 16px;
         margin-bottom: 32px;
       }
@@ -246,37 +288,46 @@
         background: var(--card-bg);
         border: 1px solid var(--card-border);
         border-radius: var(--radius-md);
-        padding: 22px;
+        padding: 20px;
+        min-width: 0;
+        word-break: break-word;
       }
 
       .hl-title {
         font-family: 'Outfit', sans-serif;
-        font-size: 1.05rem;
         font-weight: 700;
-        color: var(--starlight);
+        font-size: 1.05rem;
         margin-bottom: 6px;
+        color: var(--starlight);
       }
 
       .hl-desc {
-        font-size: 0.88rem;
+        font-size: 0.86rem;
         color: var(--haze);
+        line-height: 1.5;
       }
 
-      /* Article Content */
-      .article {
+      /* Policy Content */
+      .policy-body {
         background: var(--card-bg);
         border: 1px solid var(--card-border);
         border-radius: var(--radius-lg);
-        padding: 44px;
+        padding: 40px;
         display: flex;
         flex-direction: column;
         gap: 36px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
       }
 
       section {
         display: flex;
         flex-direction: column;
         gap: 14px;
+        min-width: 0;
+        word-break: break-word;
+        overflow-wrap: anywhere;
       }
 
       h2 {
@@ -286,19 +337,28 @@
         color: var(--starlight);
         border-bottom: 1px solid rgba(138, 147, 178, 0.15);
         padding-bottom: 8px;
+        word-break: break-word;
       }
 
       h3 {
         font-family: 'Outfit', sans-serif;
-        font-size: 1.12rem;
+        font-size: 1.1rem;
         font-weight: 600;
         color: var(--beam-bright);
         margin-top: 6px;
+        word-break: break-word;
       }
 
       p {
         font-size: 0.95rem;
-        color: #c2cde0;
+        color: #cbd5e1;
+        line-height: 1.65;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      strong {
+        color: var(--starlight);
       }
 
       ul, ol {
@@ -306,108 +366,129 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-        color: #c2cde0;
-        font-size: 0.94rem;
+      }
+
+      li {
+        font-size: 0.92rem;
+        color: #cbd5e1;
+        line-height: 1.6;
+        word-break: break-word;
+        overflow-wrap: anywhere;
       }
 
       code {
         font-family: 'JetBrains Mono', monospace;
-        background: rgba(26, 34, 56, 0.8);
-        border: 1px solid rgba(159, 196, 255, 0.2);
+        font-size: 0.8rem;
+        background: rgba(159, 196, 255, 0.1);
         color: var(--beam-bright);
         padding: 2px 6px;
         border-radius: 4px;
-        font-size: 0.85em;
+        word-break: break-all;
+        overflow-wrap: anywhere;
       }
 
+      /* Callouts */
       .callout {
-        padding: 16px 20px;
         border-radius: var(--radius-md);
-        font-size: 0.92rem;
+        padding: 16px 20px;
+        margin: 6px 0;
+        font-size: 0.9rem;
         line-height: 1.55;
+        word-break: break-word;
       }
 
       .callout-success {
-        background: rgba(1, 135, 95, 0.12);
-        border: 1px solid rgba(1, 135, 95, 0.35);
+        background: rgba(61, 220, 151, 0.08);
+        border: 1px solid rgba(61, 220, 151, 0.25);
         color: #d1fae5;
       }
 
       .callout-info {
-        background: rgba(56, 189, 248, 0.1);
-        border: 1px solid rgba(56, 189, 248, 0.3);
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.25);
         color: #e0f2fe;
       }
 
-      /* Permission cards */
-      .perm-list {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-
+      /* Permission Box */
       .perm-box {
         background: rgba(7, 10, 20, 0.5);
         border: 1px solid var(--card-border);
         border-radius: var(--radius-md);
-        padding: 20px;
+        padding: 18px;
+        margin-top: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
       }
 
-      .perm-header {
+      .perm-head {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
+        gap: 10px;
         margin-bottom: 12px;
         flex-wrap: wrap;
-        gap: 8px;
       }
 
       .perm-title {
         font-weight: 700;
-        font-size: 1.05rem;
+        font-size: 1rem;
         color: var(--starlight);
+        word-break: break-word;
       }
 
       .perm-tag {
-        font-size: 0.76rem;
-        padding: 4px 10px;
+        font-size: 0.74rem;
+        padding: 3px 10px;
         border-radius: var(--radius-full);
         background: rgba(159, 196, 255, 0.12);
         color: var(--beam);
         border: 1px solid rgba(159, 196, 255, 0.25);
+        word-break: break-word;
       }
 
       .perm-info-grid {
         display: flex;
         flex-direction: column;
         gap: 8px;
-        font-size: 0.88rem;
       }
 
       .perm-item {
         display: grid;
         grid-template-columns: 140px 1fr;
         gap: 10px;
+        min-width: 0;
       }
 
       .pi-label {
         font-weight: 600;
         color: var(--haze);
+        font-size: 0.8rem;
+        text-transform: uppercase;
       }
 
       .pi-val {
         color: #cbd5e1;
+        font-size: 0.88rem;
+        word-break: break-word;
+        overflow-wrap: anywhere;
       }
 
-      /* Table */
+      /* Responsive Tables */
+      .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 10px 0;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--card-border);
+      }
+
       table {
         width: 100%;
+        min-width: 560px;
         border-collapse: collapse;
         background: rgba(7, 10, 20, 0.4);
-        border-radius: var(--radius-md);
-        overflow: hidden;
-        border: 1px solid var(--card-border);
-        margin: 10px 0;
       }
 
       th, td {
@@ -415,59 +496,63 @@
         text-align: left;
         border-bottom: 1px solid rgba(138, 147, 178, 0.12);
         font-size: 0.88rem;
+        word-break: break-word;
       }
 
       th {
-        background: rgba(26, 34, 56, 0.6);
+        background: rgba(20, 28, 52, 0.7);
+        font-family: 'Outfit', sans-serif;
         color: var(--starlight);
         font-weight: 700;
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
 
       td {
-        color: #c2cde0;
+        color: #cbd5e1;
       }
 
-      /* Contact Cards */
+      /* Contact Grid */
       .contact-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 16px;
         margin-top: 8px;
       }
 
       .c-card {
-        padding: 20px;
-        border-radius: var(--radius-md);
-        background: rgba(14, 20, 38, 0.7);
+        background: rgba(7, 10, 20, 0.5);
         border: 1px solid var(--card-border);
+        border-radius: var(--radius-md);
+        padding: 20px;
         display: flex;
         flex-direction: column;
         gap: 6px;
         text-decoration: none;
-        color: inherit;
+        min-width: 0;
       }
 
-      .c-email-card {
-        border-color: rgba(61, 220, 151, 0.4);
-        background: rgba(1, 135, 95, 0.12);
-      }
-
-      .c-email-card:hover {
-        border-color: var(--success);
-        box-shadow: 0 0 20px rgba(61, 220, 151, 0.25);
+      .c-card:hover {
+        border-color: var(--beam);
+        background: rgba(20, 28, 52, 0.85);
       }
 
       .c-label {
-        font-size: 0.72rem;
-        text-transform: uppercase;
+        font-size: 0.74rem;
         color: var(--haze);
+        text-transform: uppercase;
+        font-weight: 600;
         letter-spacing: 0.05em;
       }
 
       .c-val {
-        font-size: 1.05rem;
+        font-family: 'Outfit', sans-serif;
         font-weight: 700;
+        font-size: 1.05rem;
         color: var(--starlight);
+        word-break: break-all;
+        overflow-wrap: anywhere;
       }
 
       .c-val-email {
@@ -486,11 +571,22 @@
         text-align: center;
         font-size: 0.86rem;
         color: var(--haze);
+        width: 100%;
+        box-sizing: border-box;
       }
 
       footer a {
         color: var(--beam);
         text-decoration: none;
+      }
+
+      @media (max-width: 960px) {
+        .highlights {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .meta-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
 
       @media (max-width: 768px) {
@@ -518,44 +614,14 @@
         }
         .hero p {
           font-size: 0.92rem;
-          margin-bottom: 18px;
-        }
-        .meta-grid {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 10px;
-          padding-top: 14px;
         }
         .highlights {
           grid-template-columns: 1fr;
           gap: 12px;
         }
-        .hl-card {
-          padding: 16px;
-        }
-        .article {
-          padding: 20px 14px;
-          gap: 26px;
-        }
-        h2 {
-          font-size: 1.25rem;
-        }
-        h3 {
-          font-size: 1.02rem;
-        }
-        p, li {
-          font-size: 0.9rem;
-          line-height: 1.6;
-        }
-        table {
-          display: block;
-          width: 100%;
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-        }
-        th, td {
-          padding: 10px 12px;
-          font-size: 0.82rem;
-          white-space: nowrap;
+        .policy-body {
+          padding: 22px 14px;
+          border-radius: var(--radius-md);
         }
         .perm-box {
           padding: 16px 14px;
@@ -565,7 +631,7 @@
           gap: 2px;
         }
         .pi-label {
-          font-size: 0.76rem;
+          font-size: 0.74rem;
           color: var(--beam);
           text-transform: uppercase;
         }
@@ -581,7 +647,6 @@
         }
         .c-val {
           font-size: 0.95rem;
-          word-break: break-all;
         }
         footer {
           padding: 24px 14px;
@@ -618,289 +683,248 @@
       <div class="hero">
         <div class="badge-row">
           <span class="badge-verified">✓ Google Play Compliant</span>
-          <span class="badge-version">v1.1.0 Production</span>
+          <span class="badge-version">v0.1.0 Production</span>
+          <span class="badge-package">com.skdevs.milkylauncher</span>
         </div>
         <h1>Privacy Policy</h1>
         <p>
-          Milky Launcher is built with privacy by design: <strong>completely offline, zero internet access, zero trackers, and 100% on-device processing.</strong>
+          Milky Launcher is built with a local-first philosophy: <strong>on-device storage, hardware biometrics, transparent permissions, and full autonomous user control.</strong>
         </p>
 
         <div class="meta-grid">
           <div class="meta-col">
             <span class="meta-label">Application</span>
-            <span class="meta-val">Milky Launcher</span>
+            <span class="meta-val">Milky Launcher (v0.1.0)</span>
+          </div>
+          <div class="meta-col">
+            <span class="meta-label">Package Name</span>
+            <span class="meta-val">com.skdevs.milkylauncher</span>
           </div>
           <div class="meta-col">
             <span class="meta-label">Developers</span>
-            <span class="meta-val">skdevs (Krishna Vishwakarma &amp; Satyakiran)</span>
+            <span class="meta-val">Krishna Vishwakarma &amp; Satyakiran (skdevs)</span>
           </div>
           <div class="meta-col">
             <span class="meta-label">Effective Date</span>
-            <span class="meta-val">October 13, 2026</span>
-          </div>
-          <div class="meta-col">
-            <span class="meta-label">Contact Email</span>
-            <span class="meta-val" style="color: var(--success);">satyakiran296@gmail.com</span>
+            <span class="meta-val" style="color: var(--success);">October 22, 2026</span>
           </div>
         </div>
       </div>
 
       <div class="highlights">
         <div class="hl-card">
-          <div class="hl-title">Zero Internet Access</div>
-          <div class="hl-desc">Milky Launcher does NOT request <code>android.permission.INTERNET</code>. The app cannot transmit any data off your device.</div>
+          <div class="hl-title">Local-First Storage</div>
+          <div class="hl-desc">Grids, pages, dock slots, and hidden apps reside solely on your device in Room SQLite &amp; DataStore.</div>
         </div>
         <div class="hl-card">
-          <div class="hl-title">Zero Trackers or SDKs</div>
-          <div class="hl-desc">No Google Analytics, Firebase, Facebook SDK, or advertising networks. Zero behavioral telemetry.</div>
+          <div class="hl-title">Hardware Biometrics</div>
+          <div class="hl-desc">App Lock relies on Android BiometricPrompt. Milky Launcher never receives or stores your biometric credentials.</div>
         </div>
         <div class="hl-card">
-          <div class="hl-title">100% On-Device Storage</div>
-          <div class="hl-desc">All preferences, icon choices, and hidden app settings remain strictly in private internal device storage.</div>
+          <div class="hl-title">Zero Personal Profiling</div>
+          <div class="hl-desc">AdMob, OneSignal, Firebase, and Billing are strictly restricted to utility functions. Zero personal data selling.</div>
         </div>
         <div class="hl-card">
-          <div class="hl-title">Complete User Ownership</div>
-          <div class="hl-desc">Clear intruder photos anytime in settings, reset preferences, or uninstall to delete all data instantly.</div>
+          <div class="hl-title">Autonomous Control</div>
+          <div class="hl-desc">Clear intruder selfies anytime, reset preferences, export local backups, or uninstall to wipe 100% of data.</div>
         </div>
       </div>
 
-      <article class="article">
-        <!-- 1 -->
-        <section>
-          <h2>1. Overview &amp; Privacy Commitment</h2>
+      <div class="policy-body">
+        <section id="summary">
+          <h2>1. Privacy at a Glance &amp; Scope</h2>
           <p>
-            This Privacy Policy governs the use of <strong>Milky Launcher</strong> (“the Application”), an Android home screen launcher developed by <strong>Krishna Vishwakarma and Satyakiran (skdevs)</strong>.
+            Welcome to <strong>Milky Launcher</strong> (“the App”), an Android home screen launcher 
+            developed by <strong>Krishna Vishwakarma and Satyakiran (skdevs)</strong>.
           </p>
           <p>
-            Your launcher is the front door to your personal device. We believe it should remain completely private. Milky Launcher does not collect, sell, harvest, transmit, or share any personal information, device telemetry, or usage statistics.
+            This Privacy Policy sets forth clear disclosures regarding how Milky Launcher handles 
+            user data, system permissions, and third-party services in full compliance with the 
+            <strong>Google Play Developer Distribution Agreement</strong> and <strong>User Data Policies</strong>. 
+            All personal configurations, home screen layouts, folders, and intruder photos are stored 100% locally on your device.
           </p>
           <div class="callout callout-success">
-            <strong>Core Principle:</strong> Milky Launcher is an offline utility. We operate no remote servers to receive, store, or profile your data.
+            <strong>Core Promise:</strong> Milky Launcher never sells, rents, or monetizes personal data. 
+            Your launcher state remains in your device's isolated storage sandbox.
           </div>
         </section>
 
-        <!-- 2 -->
-        <section>
-          <h2>2. Zero Internet &amp; Offline Operation</h2>
+        <section id="data-handling">
+          <h2>2. On-Device Architecture &amp; Network Scope</h2>
           <p>
-            Unlike many commercial launchers, Milky Launcher does not require internet connectivity:
+            Milky Launcher utilizes a clean modular architecture in Kotlin and Jetpack Compose:
           </p>
           <ul>
-            <li><strong>No Network Permission:</strong> The Application does not declare the <code>android.permission.INTERNET</code> permission. Android prevents applications without this permission from making outbound network connections.</li>
-            <li><strong>No Remote Databases:</strong> We have no external APIs or cloud servers connected to the launcher.</li>
-            <li><strong>Web Search Delegation:</strong> When a user types a query in the app drawer search and taps web search, the search is passed directly to the device’s default web browser via standard Android intents (<code>Intent.ACTION_WEB_SEARCH</code>). Milky Launcher does not intercept, log, or record your query.</li>
+            <li><strong>Room SQLite (<code>MilkyDatabase</code>):</strong> Stores custom home page orders, dock slots, folders, 2x2 enlarged folders, and hidden app lists.</li>
+            <li><strong>DataStore Preferences:</strong> Persists appearance themes, AMOLED pure black, Apple Glass acrylics, and icon scaling.</li>
+            <li><strong>Network Access (<code>android.permission.INTERNET</code>):</strong> Used strictly for AdMob settings banner ads, OneSignal update alerts, Google Play Billing entitlement checks, and anonymous Firebase crash diagnostics.</li>
           </ul>
         </section>
 
-        <!-- 3 -->
-        <section>
-          <h2>3. Sensitive Permissions Declared &amp; Justifications</h2>
+        <section id="permissions">
+          <h2>3. Complete Permissions Declared</h2>
           <p>
-            To provide launcher capabilities, custom security features, and notification indicators, Milky Launcher requests specific permissions in full accordance with Google Play's User Data &amp; Permissions Policies:
+            Declared in <code>app/src/main/AndroidManifest.xml</code> for official launcher functionality:
           </p>
 
-          <div class="perm-list">
-            <div class="perm-box">
-              <div class="perm-header">
-                <span class="perm-title">Camera Permission</span>
-                <span class="perm-tag">Optional Security Feature</span>
+          <div class="perm-box">
+            <div class="perm-head">
+              <span class="perm-title">android.permission.INTERNET</span>
+              <span class="perm-tag">Network Access</span>
+            </div>
+            <div class="perm-info-grid">
+              <div class="perm-item">
+                <span class="pi-label">Purpose</span>
+                <span class="pi-val">Powers AdMob banner ads in settings, OneSignal push notifications, Google Play In-App Billing, and search redirection.</span>
               </div>
-              <div class="perm-info-grid">
-                <div class="perm-item"><span class="pi-label">Android Permission:</span><span class="pi-val"><code>android.permission.CAMERA</code></span></div>
-                <div class="perm-item"><span class="pi-label">Feature &amp; Purpose:</span><span class="pi-val">Optional "Intruder Selfie" under App Lock. Captures a front-camera snapshot after 3 consecutive failed unlock attempts.</span></div>
-                <div class="perm-item"><span class="pi-label">Storage &amp; Privacy:</span><span class="pi-val">Saved exclusively in internal app storage (<code>context.filesDir/intruder_photos</code>). Photos are NEVER transmitted or shared.</span></div>
-                <div class="perm-item"><span class="pi-label">User Control:</span><span class="pi-val">Disabled by default. Can be enabled/disabled or cleared anytime in Milky Launcher Settings.</span></div>
+              <div class="perm-item">
+                <span class="pi-label">Storage</span>
+                <span class="pi-val">Transient network cache. Zero personal profiling or app usage data is uploaded by Milky Launcher.</span>
               </div>
             </div>
+          </div>
 
-            <div class="perm-box">
-              <div class="perm-header">
-                <span class="perm-title">Notification Listener Service</span>
-                <span class="perm-tag">Optional UI Enhancements</span>
+          <div class="perm-box">
+            <div class="perm-head">
+              <span class="perm-title">com.android.vending.BILLING</span>
+              <span class="perm-tag">Google Play Billing 8.0.0</span>
+            </div>
+            <div class="perm-info-grid">
+              <div class="perm-item">
+                <span class="pi-label">Purpose</span>
+                <span class="pi-val">Processes Milky Launcher Pro upgrades and voluntary tip donations safely through Google Play.</span>
               </div>
-              <div class="perm-info-grid">
-                <div class="perm-item"><span class="pi-label">Android Permission:</span><span class="pi-val"><code>android.permission.BIND_NOTIFICATION_LISTENER_SERVICE</code></span></div>
-                <div class="perm-item"><span class="pi-label">Feature &amp; Purpose:</span><span class="pi-val">Calculates unread notification counts and displays notification dots/badges on app icons.</span></div>
-                <div class="perm-item"><span class="pi-label">Storage &amp; Privacy:</span><span class="pi-val">Handled strictly in volatile RAM. Never saved to persistent databases or logged. Purged immediately upon dismissal.</span></div>
-                <div class="perm-item"><span class="pi-label">User Control:</span><span class="pi-val">Requires explicit user activation in Android System Settings.</span></div>
+              <div class="perm-item">
+                <span class="pi-label">Security</span>
+                <span class="pi-val">All payment transactions are encrypted by Google. Milky Launcher never sees or stores financial information.</span>
               </div>
             </div>
+          </div>
 
-            <div class="perm-box">
-              <div class="perm-header">
-                <span class="perm-title">Installed Applications &amp; Package Management</span>
-                <span class="perm-tag">Core Launcher Feature</span>
+          <div class="perm-box">
+            <div class="perm-head">
+              <span class="perm-title">android.permission.CAMERA</span>
+              <span class="perm-tag">Optional Runtime Permission</span>
+            </div>
+            <div class="perm-info-grid">
+              <div class="perm-item">
+                <span class="pi-label">Purpose</span>
+                <span class="pi-val">Exclusively powers the optional "Intruder Selfie" feature in App Lock, taking a silent front snapshot after 3 failed unlock attempts.</span>
               </div>
-              <div class="perm-info-grid">
-                <div class="perm-item"><span class="pi-label">System APIs:</span><span class="pi-val"><code>LauncherApps</code> &amp; <code>REQUEST_DELETE_PACKAGES</code></span></div>
-                <div class="perm-item"><span class="pi-label">Feature &amp; Purpose:</span><span class="pi-val">Displays installed applications in home dock and app drawer, supports work profiles, and prompts the system uninstallation dialog when requested.</span></div>
-                <div class="perm-item"><span class="pi-label">Storage &amp; Privacy:</span><span class="pi-val">Cached in local on-device SQLite database. Never sent to any external server or advertiser.</span></div>
+              <div class="perm-item">
+                <span class="pi-label">Storage</span>
+                <span class="pi-val">Saved strictly in private app storage (<code>context.filesDir/intruder_photos</code>). Never uploaded, user-deletable anytime.</span>
               </div>
             </div>
+          </div>
 
-            <div class="perm-box">
-              <div class="perm-header">
-                <span class="perm-title">Biometric Authentication</span>
-                <span class="perm-tag">Standard Android API</span>
+          <div class="perm-box">
+            <div class="perm-head">
+              <span class="perm-title">android.permission.BIND_NOTIFICATION_LISTENER_SERVICE</span>
+              <span class="perm-tag">Special App Access</span>
+            </div>
+            <div class="perm-info-grid">
+              <div class="perm-item">
+                <span class="pi-label">Purpose</span>
+                <span class="pi-val">Computes unread notification badge dots over app icons and media controls for the Music Player Compose widget.</span>
               </div>
-              <div class="perm-info-grid">
-                <div class="perm-item"><span class="pi-label">Android Permission:</span><span class="pi-val"><code>android.permission.USE_BIOMETRIC</code></span></div>
-                <div class="perm-item"><span class="pi-label">Feature &amp; Purpose:</span><span class="pi-val">Authenticates user access for locked/hidden apps via Android BiometricPrompt.</span></div>
-                <div class="perm-item"><span class="pi-label">Storage &amp; Privacy:</span><span class="pi-val">Milky Launcher NEVER accesses or stores biometric data. Verification is handled by Android's hardware security enclave.</span></div>
+              <div class="perm-item">
+                <span class="pi-label">Storage</span>
+                <span class="pi-val">Kept strictly in volatile RAM. Never saved to persistent disk, purged immediately on dismissal.</span>
               </div>
             </div>
+          </div>
 
-            <div class="perm-box">
-              <div class="perm-header">
-                <span class="perm-title">Storage &amp; Media Access</span>
-                <span class="perm-tag">User-Initiated</span>
-              </div>
-              <div class="perm-info-grid">
-                <div class="perm-item"><span class="pi-label">Permissions:</span><span class="pi-val"><code>READ_MEDIA_IMAGES</code>, <code>READ_EXTERNAL_STORAGE</code></span></div>
-                <div class="perm-item"><span class="pi-label">Feature &amp; Purpose:</span><span class="pi-val">Allows picking custom wallpapers, loading icon pack assets, and exporting/importing backup configurations.</span></div>
-                <div class="perm-item"><span class="pi-label">Storage &amp; Privacy:</span><span class="pi-val">Only reads user-selected files; no background indexing or exfiltration of personal media.</span></div>
-              </div>
+          <div class="perm-box">
+            <div class="perm-head">
+              <span class="perm-title">android.permission.USE_BIOMETRIC</span>
+              <span class="perm-tag">Hardware Enclave API</span>
             </div>
-
-            <div class="perm-box">
-              <div class="perm-header">
-                <span class="perm-title">App Widget Host</span>
-                <span class="perm-tag">Home Canvas Feature</span>
+            <div class="perm-info-grid">
+              <div class="perm-item">
+                <span class="pi-label">Purpose</span>
+                <span class="pi-val">Unlocks locked apps and the Hidden Apps Vault using fingerprint or face authentication.</span>
               </div>
-              <div class="perm-info-grid">
-                <div class="perm-item"><span class="pi-label">Permission:</span><span class="pi-val"><code>android.permission.BIND_APPWIDGET</code></span></div>
-                <div class="perm-item"><span class="pi-label">Feature &amp; Purpose:</span><span class="pi-val">Binds and displays user-selected home screen widgets on the launcher workspace.</span></div>
+              <div class="perm-item">
+                <span class="pi-label">Security</span>
+                <span class="pi-val">Handled by Android Secure Element. Milky Launcher receives only a boolean pass/fail result.</span>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- 4 -->
-        <section>
-          <h2>4. Prominent Disclosure: Camera &amp; Intruder Selfie</h2>
-          <div class="callout callout-info">
-            <strong>Camera Usage Disclosure:</strong> The camera permission is requested solely for the optional "Intruder Selfie" security feature under App Lock.
+        <section id="third-parties">
+          <h2>4. Third-Party SDKs &amp; Services</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Identifier</th>
+                  <th>Purpose</th>
+                  <th>Data Scope</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Google Mobile Ads (AdMob)</strong></td>
+                  <td><code>ca-app-pub-8300386079649281~5905394290</code></td>
+                  <td>Settings banner ads</td>
+                  <td>Advertising ID (if enabled), coarse diagnostics</td>
+                </tr>
+                <tr>
+                  <td><strong>OneSignal Push</strong></td>
+                  <td><code>a991bcf0-7e69-456b-955a-1e90ae7e7847</code></td>
+                  <td>Update alerts and release notes</td>
+                  <td>Anonymous device push token</td>
+                </tr>
+                <tr>
+                  <td><strong>Google Play Billing</strong></td>
+                  <td>Library 8.0.0</td>
+                  <td>Milky Pro purchase &amp; donations</td>
+                  <td>Google Play transaction tokens</td>
+                </tr>
+                <tr>
+                  <td><strong>Firebase Analytics</strong></td>
+                  <td>BoM 33.10.0</td>
+                  <td>Crash &amp; stability monitoring</td>
+                  <td>Anonymous performance telemetry</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <p>
-            When enabled by the user in Settings, if an unauthorized individual fails 3 consecutive unlock attempts, the front-facing camera captures a silent snapshot. The snapshot is saved locally to private internal app storage. Captured images are NEVER transmitted over any network and are completely deleted when the user clears intruder photos or uninstalls Milky Launcher.
-          </p>
         </section>
 
-        <!-- 5 -->
-        <section>
-          <h2>5. Prominent Disclosure: Notification Access</h2>
-          <div class="callout callout-info">
-            <strong>Notification Access Disclosure:</strong> Notification access is requested solely to display unread count badges and notification dots on launcher icons.
-          </div>
-          <p>
-            Incoming notification details (package name, notification count, title, and preview snippet) are held in volatile device memory and discarded when dismissed. They are never written to disk or shared with external parties.
-          </p>
-        </section>
-
-        <!-- 6 -->
-        <section>
-          <h2>6. Third-Party Libraries &amp; Trackers</h2>
-          <p>
-            Milky Launcher contains zero advertising SDKs, zero remote telemetry, and zero third-party tracking libraries:
-          </p>
-          <table>
-            <thead>
-              <tr>
-                <th>Service Category</th>
-                <th>Third-Party Services Included</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Advertising SDKs</td>
-                <td>None (No AdMob, Unity Ads, AppLovin, etc.)</td>
-                <td>100% Ad-Free</td>
-              </tr>
-              <tr>
-                <td>Analytics / Telemetry</td>
-                <td>None (No Google Analytics, Firebase, Mixpanel)</td>
-                <td>Zero Telemetry</td>
-              </tr>
-              <tr>
-                <td>Crash Reporting Services</td>
-                <td>None (No Crashlytics, Sentry, Bugsnag)</td>
-                <td>No Remote Logs</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
-        <!-- 7 -->
-        <section>
-          <h2>7. Data Retention &amp; User Data Deletion Policy</h2>
-          <p>
-            Because all application data is stored locally on your device, you have complete ownership and control over data deletion:
-          </p>
-          <ul>
-            <li><strong>Clear Intruder Selfies:</strong> Open Milky Launcher <code>Settings &gt; App Lock &gt; Intruder Photos</code> and tap <em>"Clear All Photos"</em>.</li>
-            <li><strong>Clear All App Data:</strong> Navigate to Android <code>Settings &gt; Apps &gt; Milky Launcher &gt; Storage &gt; Clear Storage</code>. This wipes all preferences, custom layouts, and databases.</li>
-            <li><strong>Uninstallation:</strong> Uninstalling Milky Launcher immediately purges 100% of internal storage directories and cached data from your device.</li>
-          </ul>
-        </section>
-
-        <!-- 8 -->
-        <section>
-          <h2>8. Children's Privacy (COPPA &amp; GDPR-K)</h2>
-          <p>
-            Milky Launcher does not collect personal data from anyone, including children under 13 (or under 16 in the European Union). The app does not display targeted advertisements or collect age-specific data, and fully complies with COPPA and GDPR Article 8.
-          </p>
-        </section>
-
-        <!-- 9 -->
-        <section>
-          <h2>9. Security Architecture</h2>
-          <p>
-            All launcher settings, icon selections, and security snapshots are protected by Android's application sandbox. With zero outbound network permissions, Milky Launcher has zero external attack surface for remote data exfiltration.
-          </p>
-        </section>
-
-        <!-- 10 -->
-        <section>
-          <h2>10. Developer &amp; Contact Information</h2>
-          <p>
-            If you have questions, feedback, or concerns regarding this Privacy Policy or your device privacy in Milky Launcher, contact the development team directly:
-          </p>
-
+        <section id="contact">
+          <h2>5. Contact &amp; Support</h2>
           <div class="contact-grid">
-            <a href="mailto:satyakiran296@gmail.com" class="c-card c-email-card">
-              <span class="c-label">Official Privacy &amp; Support Email</span>
-              <strong class="c-val c-val-email">satyakiran296@gmail.com</strong>
-              <span class="c-sub">Direct developer contact for Play Store support</span>
+            <a href="mailto:satyakiran296@gmail.com" class="c-card">
+              <span class="c-label">Official Support Email</span>
+              <span class="c-val c-val-email">satyakiran296@gmail.com</span>
+              <span class="c-sub">Direct developer contact for inquiries</span>
             </a>
-
             <div class="c-card">
               <span class="c-label">Development Team</span>
-              <strong class="c-val">skdevs</strong>
+              <span class="c-val">skdevs</span>
               <span class="c-sub">Krishna Vishwakarma &amp; Satyakiran</span>
             </div>
-
             <a href="https://skdev.psatyakiran.in/" target="_blank" rel="noopener noreferrer" class="c-card">
-              <span class="c-label">Developer Portfolio</span>
-              <strong class="c-val">skdev.psatyakiran.in</strong>
-              <span class="c-sub">Official developer website</span>
+              <span class="c-label">Developer Studio</span>
+              <span class="c-val">skdev.psatyakiran.in</span>
+              <span class="c-sub">Visit studio website</span>
             </a>
-
             <a href="https://t.me/milkylc" target="_blank" rel="noopener noreferrer" class="c-card">
-              <span class="c-label">Official Telegram Community</span>
-              <strong class="c-val">t.me/milkylc</strong>
-              <span class="c-sub">Join @milkylc for real-time discussion</span>
+              <span class="c-label">Telegram Community</span>
+              <span class="c-val">t.me/milkylc</span>
+              <span class="c-sub">Join @milkylc for support</span>
             </a>
           </div>
         </section>
-      </article>
+      </div>
     </main>
 
     <footer>
-      <p>
-        © 2026 Milky Launcher. Developed by Krishna Vishwakarma &amp; Satyakiran (skdevs).<br />
-        <a href="/">Home</a> • <a href="https://t.me/milkylc">Telegram: @milkylc</a> • <a href="https://skdev.psatyakiran.in/">skdev.psatyakiran.in</a> • Support: <a href="mailto:satyakiran296@gmail.com">satyakiran296@gmail.com</a>
-      </p>
+      <p>© 2026 Milky Launcher. Developed with care by Krishna Vishwakarma &amp; Satyakiran (skdevs). Target Google Play Launch: November 19, 2026.</p>
     </footer>
   </body>
 </html>
